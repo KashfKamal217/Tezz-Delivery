@@ -13,7 +13,7 @@ from app.services.whatsapp_sender import send_whatsapp_message
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-VERIFY_TOKEN = os.getenv("WEBHOOK_VERIFY_TOKEN", "tezz_delivery_secret_2026")
+VERIFY_TOKEN = os.getenv("WEBHOOK_VERIFY_TOKEN", "tezzdelivery123")
 
 
 # ── Webhook verification (Meta requires this) ──────────────────────────────
