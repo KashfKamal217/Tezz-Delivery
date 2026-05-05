@@ -1,12 +1,19 @@
 from fastapi import FastAPI
-from app.routes import webhook
 from dotenv import load_dotenv
+import os
 
-load_dotenv()  # ADD THIS
+# -----------------------------
+# LOAD ENV FIRST (VERY IMPORTANT)
+# -----------------------------
+load_dotenv()
+
+from app.routes import webhook  # import AFTER dotenv
 
 app = FastAPI()
 
+# include routes
 app.include_router(webhook.router)
+
 
 @app.get("/")
 def home():
