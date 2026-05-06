@@ -7,7 +7,7 @@ from app.services.notification import send_whatsapp_message
 
 router = APIRouter()
 
-# TEMP MEMORY (replace with Redis later)
+# TEMP MEMORY (replace with DB later)
 user_state = {}
 
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")
@@ -33,7 +33,7 @@ async def verify_webhook(request: Request):
 # 2. WHATSAPP MESSAGE RECEIVER (POST)
 # --------------------------------------------------
 @router.post("/webhook")
-async def whatsapp_webhook(data: dict = Body(...)):  #  FIXED (Swagger JSON enabled)
+async def whatsapp_webhook(data: dict = Body(...)):
 
     try:
         entry = data.get("entry", [])[0]
@@ -47,7 +47,8 @@ async def whatsapp_webhook(data: dict = Body(...)):  #  FIXED (Swagger JSON enab
         if not user_id or not text:
             return {"status": "no_message"}
 
-    except Exception:
+    except Exception as e:
+        print("Webhook parsing error:", e)  # ✅ DEBUG ADDED
         return {"status": "error_parsing"}
 
     # -----------------------------
@@ -55,12 +56,15 @@ async def whatsapp_webhook(data: dict = Body(...)):  #  FIXED (Swagger JSON enab
     # -----------------------------
     user_data = user_state.get(user_id, {
         "state": "GREETING",
-        "address": None
+        "address": None,
+        "lang": "en"   # ✅ ADDED (language support)
     })
 
     state = user_data["state"]
 
-    # Process message
+    # -----------------------------
+    # PROCESS MESSAGE (CORE LOGIC)
+    # -----------------------------
     response, new_state, updated_data = handle_user_message(
         user_id,
         text,
@@ -68,11 +72,15 @@ async def whatsapp_webhook(data: dict = Body(...)):  #  FIXED (Swagger JSON enab
         user_data
     )
 
-    # Save state
+    # -----------------------------
+    # SAVE STATE
+    # -----------------------------
     updated_data["state"] = new_state
     user_state[user_id] = updated_data
 
-    # Send reply
+    # -----------------------------
+    # SEND REPLY TO WHATSAPP
+    # -----------------------------
     await send_whatsapp_message(user_id, response)
 
     return {"status": "ok"}
