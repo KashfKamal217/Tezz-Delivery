@@ -1,5 +1,18 @@
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
+
+# Environment
 .env
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
 .DS_Store
+
+# Secrets
+serviceAccountKey.json

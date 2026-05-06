@@ -1,66 +1,99 @@
-# Tezz Delivery - Payment & Language Module
+# 🚀 Tezz Delivery - WhatsApp Automation System
 
 ## 📌 Overview
-This is a standalone module developed for the Tezz Delivery Automation System.  
-It handles two main features of the system:
+Tezz Delivery is a WhatsApp-based automation system for a Cash & Carry kitchen business.
 
-- 💰 Payment Processing (Easypaisa & Cash on Delivery)
-- 🌐 Multi-language Support (English & Urdu)
-
-This module is part of a larger WhatsApp-based order automation system.
+It automates:
+- Customer chat handling
+- Product selection
+- Cart management
+- Order confirmation
+- Payment processing
+- Language switching (English / Urdu)
 
 ---
 
-## 🚀 Features
+## 🧠 Core Features
+
+### 🤖 WhatsApp Chatbot
+- Auto replies to customers
+- Shows product catalog
+- Handles order flow step-by-step
+
+---
+
+### 🛒 Cart System
+- Add/remove items
+- Live total calculation
+- Order summary before confirmation
+
+---
 
 ### 💰 Payment Module
-- Supports two payment methods:
-  - Easypaisa
-  - Cash on Delivery (COD)
-- Simple selection-based flow
+- Easypaisa integration (planned / backend ready)
+- Cash on Delivery (COD)
 
-### 🌐 Language Module
-- Supports bilingual interface:
-  - English (EN)
-  - Urdu (UR)
-- Dynamic message switching based on user choice
+---
+
+### 🌐 Language Support
+- English 🇬🇧
+- Urdu 🇵🇰
+- Dynamic switching based on user choice
+
+---
+
+## 🔄 System Workflow
+
+1. Customer sends message on WhatsApp  
+2. Bot greets and shows products  
+3. User selects items  
+4. Items added to cart  
+5. Bot asks: "Do you want more items?"  
+6. Final bill is generated  
+7. User selects payment method  
+8. User provides name + address  
+9. Order sent to admin/delivery group  
+
+---
+
+## 🧱 Tech Stack
+- Python / FastAPI  
+- WhatsApp Cloud API  
+- Firebase / MongoDB (optional backend)  
+- GitHub collaboration workflow  
 
 ---
 
 ## 📁 Project Structure
-tezz-payment-module/
+
+
+tezz-delivery/
 │
-├── main.py # Main execution file
-├── payment.py # Payment logic (Easypaisa & COD)
-├── language.py # English/Urdu message handling
-└── README.md # Project documentation
+├── app/
+│ ├── main.py
+│ ├── routes/
+│ ├── services/
+│ ├── utils/
+│ └── schemas/
+│
+├── database/
+├── requirements.txt
+└── README.md
+
+
+---
 
 ## ▶️ How to Run
 
-### Step 1: Clone or open project
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload
 
-### Step 2: Run the project
+👨‍💻 Team Modules
+Payment Integration (Easypaisa + COD)
+Language Support (EN/UR)
+Backend WhatsApp webhook system
+Cart & order flow logic
+📌 Notes
 
-
----
-
-## 🔄 Workflow
-
-1. User selects language (English / Urdu)
-2. System displays messages accordingly
-3. User views cart and total bill
-4. User selects payment method:
-   - Easypaisa
-   - Cash on Delivery
-5. User enters personal details
-6. Final order summary is generated
-
----
-
-## 👨‍💻 Developed By
-Amanuel Ayana
-
----
-
-## 📌 Note
-This module is designed to be integrated into a larger WhatsApp-based automation system.
+This system is part of a group project and integrates multiple backend modules into a WhatsApp automation pipeline.
