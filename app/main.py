@@ -7,8 +7,6 @@ from app.routes.webhook import router as webhook_router
 # Load env
 load_dotenv()
 
-print("VERIFY TOKEN:", os.getenv("VERIFY_TOKEN"))
-
 # FastAPI app
 app = FastAPI()
 
